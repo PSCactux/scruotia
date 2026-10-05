@@ -1,0 +1,141 @@
+id: snowflake
+name: Snowflake Method
+author: Randy Ingermanson
+description: Catálogo de artefactos que componen la bible. La conversación con la IA es lo que los va rellenando — no hace falta recorrerlos en orden.
+steps:
+  - id: step-01-logline
+    order: 1
+    title: Logline (una frase)
+    instruction: |
+      Escribe UNA SOLA FRASE que resuma toda la novela.
+      Máximo 15 palabras. Incluye protagonista, conflicto y stakes.
+    output_file: 00-premise/logline.md
+    output_type: premise
+    ui_kind: single_input
+    prompts_to_ask:
+      - "¿Quién es el protagonista?"
+      - "¿Cuál es el conflicto central?"
+      - "¿Qué está en juego?"
+  - id: step-02-paragraph
+    order: 2
+    title: Estructura en 5 frases
+    instruction: |
+      Expande la logline en 5 frases que cubran la arquitectura de la novela:
+      Setup, Disastro 1 (final acto 1), Disastro 2 (midpoint), Disastro 3 (final acto 2), Resolución.
+    output_file: 00-premise/paragraph.md
+    output_type: premise
+    ui_kind: paragraph_fields
+    prompts_to_ask:
+      - "¿Cómo empieza? Mundo normal del protagonista."
+      - "¿Qué rompe el statu quo?"
+      - "¿Qué giro ocurre a mitad?"
+      - "¿Cuál es el peor momento?"
+      - "¿Cómo resuelve?"
+  - id: step-voice
+    order: 3
+    title: Voz y estilo narrativo
+    instruction: |
+      Define la voz narrativa de la novela: persona, tiempo verbal, registro, ritmo, POV.
+      Incluye un párrafo de muestra que ejemplifique el tono que quieres en el primer borrador.
+      Sin esto, la Fase 2 inventará el estilo capítulo a capítulo.
+    output_file: 00-premise/voice.md
+    output_type: voice-style
+    ui_kind: voice_style
+    prompts_to_ask:
+      - "¿Primera o tercera persona? ¿Limitada u omnisciente?"
+      - "¿Pasado o presente?"
+      - "¿Registro: coloquial, neutro, culto, literario, infantil?"
+      - "¿Ritmo: rápido y conciso, medio, reflexivo y descriptivo?"
+      - "¿POV fijo en un personaje o rotativo entre varios?"
+      - "¿Puedes escribir un párrafo de muestra del tono que quieres?"
+  - id: step-03-characters
+    order: 4
+    title: Fichas de personajes
+    instruction: |
+      Para cada personaje principal: nombre, rol, want (deseo externo), need (necesidad interna), arco, descripción breve.
+      Empieza con protagonista y antagonista. Añade secundarios clave (3-5 en total).
+    output_file: 02-characters/_overview.md
+    output_type: character-overview
+    ui_kind: character_cards
+    prompts_to_ask:
+      - "¿Quiénes son los personajes principales (3-5)?"
+      - "Para cada uno: ¿qué quiere y qué necesita?"
+  - id: step-world
+    order: 5
+    title: Canon del mundo
+    instruction: |
+      Define el mundo de la novela como verdad inviolable para la Fase 2.
+      Lugares clave, sistema (mágico, tecnológico, social, etc.), vocabulario propio,
+      fauna/cultura distintiva, calendario y reglas que NO pueden romperse.
+      Si tu historia es realista, igual rellena lugares y vocabulario propio del entorno.
+    output_file: 01-world/_canon.md
+    output_type: world-canon
+    ui_kind: world_canon
+    prompts_to_ask:
+      - "¿Qué lugares físicos aparecen y cómo son?"
+      - "¿Hay un sistema (magia, tecnología, política) con reglas?"
+      - "¿Qué vocabulario propio del mundo usas?"
+      - "¿Qué reglas del mundo son inviolables?"
+  - id: step-04-synopsis
+    order: 6
+    title: Sinopsis completa
+    instruction: |
+      Expande las 5 frases del paso 2 en una sinopsis larga (1-4 páginas).
+      Cada frase del paso 2 se convierte en uno o más párrafos. Añade subtramas y giros menores.
+    output_file: 03-structure/synopsis.md
+    output_type: structure
+    ui_kind: markdown
+    prompts_to_ask:
+      - "¿Qué subtramas existen?"
+      - "¿Cómo se desarrolla cada acto en detalle?"
+  - id: step-05-character-bibles
+    order: 7
+    title: Bibles de personajes
+    instruction: |
+      Para cada personaje principal: backstory, físico, voz, relaciones clave, secretos, arco emocional detallado.
+      Esto profundiza las fichas del paso 3, no las repite.
+    output_file: 02-characters/_bibles.md
+    output_type: character-bible
+    ui_kind: character_bibles
+    prompts_to_ask:
+      - "¿Qué backstory tiene este personaje?"
+      - "¿Cómo habla, cómo se mueve, cómo se viste?"
+      - "¿Qué secretos guarda?"
+  - id: step-06-scenes
+    order: 8
+    title: Lista de escenas
+    instruction: |
+      Lista todas las escenas de la novela con densidad suficiente para que la Fase 2
+      no necesite inventar. Cada escena lleva beat, capítulo, POV, personajes presentes,
+      ubicación, qué pasa, conflicto, resolución parcial, estado emocional inicio/fin,
+      info nueva para el lector, qué planta/paga y target de palabras.
+      Apunta a 40-80 escenas para una novela típica.
+    output_file: 04-plot/scenes.md
+    output_type: scene-list
+    ui_kind: scene_table
+    prompts_to_ask:
+      - "¿Cuál es la escena de apertura?"
+      - "¿Qué escenas marcan cada beat estructural?"
+      - "¿En qué capítulo va cada escena?"
+  - id: step-07-scene-narratives
+    order: 9
+    title: Narrativa por escena (opcional)
+    instruction: |
+      Opcional. Para cada escena del paso anterior, escribe un párrafo narrativo describiendo qué pasa.
+      Sin diálogo aún, solo acción y sensaciones. Puedes hacerlo solo para escenas clave.
+    output_file: 04-plot/scene-narratives.md
+    output_type: scene-narrative
+    ui_kind: markdown
+    prompts_to_ask:
+      - "¿Para qué escena quieres expandir la narrativa?"
+  - id: step-08-handoff
+    order: 10
+    title: Listo para escribir (Fase 2)
+    instruction: |
+      Fin de la Fase 1. Toda la bible está lista. Exporta el bundle desde el botón "Exportar"
+      y úsalo como contexto único en la Fase 2. La instrucción para Fase 2 debe ser:
+      "Si un dato concreto no aparece en este bundle, NO lo inventes — marca [FALTA: ...] y para."
+    output_file: null
+    output_type: handoff
+    ui_kind: markdown
+    prompts_to_ask: []
