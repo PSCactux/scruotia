@@ -8,7 +8,7 @@ import { listEntities, writeEntity } from '../entities';
 // Small invented fixture project, written to a temp dir so the test
 // exercises the real filesystem loader (listEntities) end to end.
 async function fixtureProject(): Promise<string> {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'scruotia-pulse-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'skriptia-pulse-'));
   const base = { status: 'drafting' as const, created: '2026-05-16T00:00:00Z', updated: '2026-05-16T00:00:00Z' };
   await writeEntity(root, {
     ...base, type: 'personaje', slug: 'mara', name: 'Mara',

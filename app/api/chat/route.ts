@@ -207,7 +207,7 @@ Usamos **fences markdown** (\`~~~\`) para todos los bloques. Es lo más robusto:
 
 ═══ CARD — crear o reemplazar una entidad ═══
 
-~~~scruotia-card type:slug
+~~~skriptia-card type:slug
 name=Nombre legible
 icon=emoji opcional
 ---
@@ -221,7 +221,7 @@ icon=emoji opcional
 
 ═══ PATCH — modificar solo algunos campos sin tocar el resto ═══
 
-~~~scruotia-patch type:slug
+~~~skriptia-patch type:slug
 Want=Que la dejen en paz
 Need=Aceptar que necesita a alguien
 ~~~
@@ -238,7 +238,7 @@ REGLAS:
    - \`__trailing\` = prosa libre tras los bullets
 4. Para valores MULTI-LÍNEA usa heredoc \`<<<\` … \`>>>\` (cada delimitador en su línea):
 
-~~~scruotia-patch personaje:mara
+~~~skriptia-patch personaje:mara
 backstory=<<<
 Antes de que Tito llegara al faro,
 Mara nunca había enseñado a nadie el oficio.
@@ -255,7 +255,7 @@ Cuándo PATCH vs CARD:
 
 ═══ LINK — vincular dos entidades ═══
 
-~~~scruotia-link personaje/mara lugar/faro
+~~~skriptia-link personaje/mara lugar/faro
 label=vive en
 ~~~
 
@@ -263,18 +263,18 @@ label=vive en
 
 ═══ DELETE — borrar una entidad creada por error ═══
 
-~~~scruotia-delete personaje/x
+~~~skriptia-delete personaje/x
 ~~~
 
 ═══ FACT — hecho INMUTABLE del proyecto (edades, distancias, reglas que nunca cambian) ═══
 
-~~~scruotia-fact
+~~~skriptia-fact
 Mara tiene 64 años cuando empieza la novela.
 ~~~
 
 ═══ SUGGEST — preguntas con respuesta cliclable (la UI las pinta como botones) ═══
 
-~~~scruotia-suggest
+~~~skriptia-suggest
 ¿Qué oficio tiene la protagonista?
 - Farera
 - Cartógrafa
@@ -282,7 +282,7 @@ Mara tiene 64 años cuando empieza la novela.
 - Relojera
 ~~~
 
-~~~scruotia-suggest
+~~~skriptia-suggest
 Profundizar en el conflicto central
 ~~~
 
@@ -329,7 +329,7 @@ ${phaseBlock}${factsBlock}${lockedNote}${stateBlock}${focusBlock}${coachingHints
   // strips these markers from display (see stripBlocks in ChatColumn).
   const emitStatus = (controller: ReadableStreamDefaultController, phase: string, data: Record<string, unknown> = {}) => {
     const payload = JSON.stringify({ phase, ...data });
-    controller.enqueue(encoder.encode(`\n~~~scruotia-status\n${payload}\n~~~\n`));
+    controller.enqueue(encoder.encode(`\n~~~skriptia-status\n${payload}\n~~~\n`));
   };
 
   const stream = new ReadableStream({
@@ -386,7 +386,7 @@ ${phaseBlock}${factsBlock}${lockedNote}${stateBlock}${focusBlock}${coachingHints
           const existing = existingMap.get(key);
           const incomingBody = (c.body ?? '').trim();
           // GUARD: never let an empty CARD body wipe out a populated entity.
-          // The AI sometimes emits ~~~scruotia-card type:slug~~~ with no body
+          // The AI sometimes emits ~~~skriptia-card type:slug~~~ with no body
           // — that used to silently overwrite previous content with "". From
           // now on, if there's nothing new and there IS something old, skip
           // (we still update name/icon if those changed).

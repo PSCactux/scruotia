@@ -46,35 +46,35 @@ const SUGGEST_RE = /<{2,}\s*SUGGEST\s*>{2,}([\s\S]*?)<{2,}\s*END\s*>{2,}/g;
 // each fence may contain anything except a line starting with `~~~`.
 //
 // Examples:
-//   ~~~scruotia-card personaje:mara
+//   ~~~skriptia-card personaje:mara
 //   name=Mara
 //   icon=🧭
 //   ---
 //   markdown body
 //   ~~~
 //
-//   ~~~scruotia-patch personaje:mara
+//   ~~~skriptia-patch personaje:mara
 //   Want=Que la dejen en paz
 //   Need=Soltar el luto
 //   ~~~
 //
-//   ~~~scruotia-link personaje/mara lugar/faro
+//   ~~~skriptia-link personaje/mara lugar/faro
 //   label=vive en
 //   ~~~
 //
-//   ~~~scruotia-delete personaje/x
+//   ~~~skriptia-delete personaje/x
 //   ~~~
 //
-//   ~~~scruotia-fact
+//   ~~~skriptia-fact
 //   Mara tiene 64 años cuando empieza la novela.
 //   ~~~
 //
-//   ~~~scruotia-suggest
+//   ~~~skriptia-suggest
 //   ¿Qué tipo de antagonista?
 //   - humano cercano
 //   - fuerza natural
 //   ~~~
-const FENCE_RE = /(?:^|\n)\s*~~~\s*scruotia-(card|patch|link|delete|fact|suggest)\b([^\n]*)\n?([\s\S]*?)\n?\s*~~~(?=\s*(?:\n|$))/g;
+const FENCE_RE = /(?:^|\n)\s*~~~\s*skriptia-(card|patch|link|delete|fact|suggest)\b([^\n]*)\n?([\s\S]*?)\n?\s*~~~(?=\s*(?:\n|$))/g;
 
 function normalizeId(raw: string): string {
   return raw

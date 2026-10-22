@@ -57,9 +57,9 @@ function applyingSummary(c: { cards: number; patches: number; links: number; del
 function stripBlocks(text: string): string {
   let display = text
     // Status events injected by the server (applying / done / error).
-    .replace(/\n?~~~scruotia-status\n[\s\S]*?\n~~~\n?/g, '')
+    .replace(/\n?~~~skriptia-status\n[\s\S]*?\n~~~\n?/g, '')
     // Fenced protocol (preferred since v4).
-    .replace(/(?:^|\n)\s*~~~\s*scruotia-(?:card|patch|link|delete|fact|suggest)\b[\s\S]*?\n\s*~~~(?=\s*(?:\n|$))/g, '')
+    .replace(/(?:^|\n)\s*~~~\s*skriptia-(?:card|patch|link|delete|fact|suggest)\b[\s\S]*?\n\s*~~~(?=\s*(?:\n|$))/g, '')
     // Legacy <<<…>>> protocol (tolerant to 2+ chevrons).
     .replace(/<{2,}\s*CARD\s*:\s*[^:/<>\n]+?\s*:\s*[^:/<>\n]+?\s*>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '')
     .replace(/<{2,}\s*PATCH\s*:\s*[^:/<>\n]+?\s*:\s*[^:/<>\n]+?\s*>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '')
@@ -70,7 +70,7 @@ function stripBlocks(text: string): string {
     .replace(/<{2,}\s*DOC(?:\s*:\s*[^<>]+?)?\s*>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '');
   // While streaming, also hide a trailing unterminated block start so the
   // user never sees half a block. Both fence opener and legacy start.
-  const openFence = display.search(/(?:^|\n)\s*~~~\s*scruotia-/);
+  const openFence = display.search(/(?:^|\n)\s*~~~\s*skriptia-/);
   if (openFence !== -1 && !/\n\s*~~~\s*(?:\n|$)/.test(display.slice(openFence + 1))) {
     display = display.slice(0, openFence);
   }
@@ -140,11 +140,11 @@ export default function ChatColumn({
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let acc = '';
-    // Status events injected by the server: ~~~scruotia-status\n{json}\n~~~
+    // Status events injected by the server: ~~~skriptia-status\n{json}\n~~~
     // When we see "applying" we free the input so the user can type the next
     // turn while disk writes finish. When we see "done" we pop the success
     // pills with the real touched ids.
-    const STATUS_RE = /\n?~~~scruotia-status\n([\s\S]*?)\n~~~\n?/g;
+    const STATUS_RE = /\n?~~~skriptia-status\n([\s\S]*?)\n~~~\n?/g;
     let serverTouched: string[] = [];
     let serverDeletes: string[] = [];
     let serverFacts = 0;
@@ -192,7 +192,7 @@ export default function ChatColumn({
     // consistent with extractEntityUpdates() (whitespace + accents allowed).
     const cardMatches = [...acc.matchAll(/<{2,}\s*CARD\s*:\s*([^:/<>\n]+?)\s*:\s*([^:/<>\n]+?)\s*>{2,}/g)];
     const patchMatches = [...acc.matchAll(/<{2,}\s*PATCH\s*:\s*([^:/<>\n]+?)\s*:\s*([^:/<>\n]+?)\s*>{2,}/g)];
-    const fenceMatches = [...acc.matchAll(/(?:^|\n)\s*~~~\s*scruotia-(card|patch)\s+([^:\s]+?)\s*:\s*([^\s\n]+)/g)];
+    const fenceMatches = [...acc.matchAll(/(?:^|\n)\s*~~~\s*skriptia-(card|patch)\s+([^:\s]+?)\s*:\s*([^\s\n]+)/g)];
     const normalize = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     const touched = Array.from(new Set([
       ...cardMatches.map(m => `${normalize(m[1])}/${normalize(m[2])}`),
@@ -201,12 +201,12 @@ export default function ChatColumn({
     ].filter(s => s !== '/')));
     const deletes = Array.from(new Set([
       ...[...acc.matchAll(/<{2,}\s*DELETE\s*:\s*([^:/<>\n]+?)\s*\/\s*([^:/<>\n]+?)\s*>{2,}/g)].map(m => `${normalize(m[1])}/${normalize(m[2])}`),
-      ...[...acc.matchAll(/(?:^|\n)\s*~~~\s*scruotia-delete\s+([^/\s]+)\/([^\s\n]+)/g)].map(m => `${normalize(m[1])}/${normalize(m[2])}`),
+      ...[...acc.matchAll(/(?:^|\n)\s*~~~\s*skriptia-delete\s+([^/\s]+)\/([^\s\n]+)/g)].map(m => `${normalize(m[1])}/${normalize(m[2])}`),
     ].filter(s => s !== '/')));
     const factCount = [...acc.matchAll(/<{2,}\s*FACT\s*>{2,}/g)].length
-      + [...acc.matchAll(/(?:^|\n)\s*~~~\s*scruotia-fact\b/g)].length;
+      + [...acc.matchAll(/(?:^|\n)\s*~~~\s*skriptia-fact\b/g)].length;
     const legacySuggestions = [...acc.matchAll(/<{2,}\s*SUGGEST\s*>{2,}([\s\S]*?)<{2,}\s*END\s*>{2,}/g)];
-    const fenceSuggestions = [...acc.matchAll(/(?:^|\n)\s*~~~\s*scruotia-suggest\b[^\n]*\n([\s\S]*?)\n\s*~~~/g)];
+    const fenceSuggestions = [...acc.matchAll(/(?:^|\n)\s*~~~\s*skriptia-suggest\b[^\n]*\n([\s\S]*?)\n\s*~~~/g)];
     const suggestionList: Suggestion[] = [...legacySuggestions, ...fenceSuggestions]
       .map(m => m[1].trim())
       .filter(Boolean)

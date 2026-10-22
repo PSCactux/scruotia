@@ -60,7 +60,7 @@ export default function MobileChat({ slug, title, entityCount, initialMessages }
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let acc = '';
-    const STATUS_RE = /\n?~~~scruotia-status\n([\s\S]*?)\n~~~\n?/g;
+    const STATUS_RE = /\n?~~~skriptia-status\n([\s\S]*?)\n~~~\n?/g;
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -241,7 +241,7 @@ export default function MobileChat({ slug, title, entityCount, initialMessages }
             <header className="px-4 py-3 border-b-2 border-slate-200 flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center">S</div>
               <div className="flex-1">
-                <div className="text-[10px] uppercase tracking-widest text-indigo-600 font-bold">Scruotia mobile</div>
+                <div className="text-[10px] uppercase tracking-widest text-indigo-600 font-bold">Skriptia mobile</div>
                 <div className="text-sm font-bold text-slate-900">{title}</div>
               </div>
               <button onClick={() => setDrawer(false)} className="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center">✕</button>
@@ -265,15 +265,15 @@ export default function MobileChat({ slug, title, entityCount, initialMessages }
 
 function stripBlocks(text: string): string {
   let display = text
-    .replace(/\n?~~~scruotia-status\n[\s\S]*?\n~~~\n?/g, '')
-    .replace(/(?:^|\n)\s*~~~\s*scruotia-(?:card|patch|link|delete|fact|suggest)\b[\s\S]*?\n\s*~~~(?=\s*(?:\n|$))/g, '')
+    .replace(/\n?~~~skriptia-status\n[\s\S]*?\n~~~\n?/g, '')
+    .replace(/(?:^|\n)\s*~~~\s*skriptia-(?:card|patch|link|delete|fact|suggest)\b[\s\S]*?\n\s*~~~(?=\s*(?:\n|$))/g, '')
     .replace(/<{2,}\s*CARD\s*:\s*[^:/<>\n]+?\s*:\s*[^:/<>\n]+?\s*>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '')
     .replace(/<{2,}\s*PATCH\s*:\s*[^:/<>\n]+?\s*:\s*[^:/<>\n]+?\s*>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '')
     .replace(/<{2,}\s*LINK\s*:[^>]*?>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '')
     .replace(/<{2,}\s*DELETE\s*:[^>]*?>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '')
     .replace(/<{2,}\s*FACT\s*>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '')
     .replace(/<{2,}\s*SUGGEST\s*>{2,}[\s\S]*?<{2,}\s*END\s*>{2,}/g, '');
-  const openFence = display.search(/(?:^|\n)\s*~~~\s*scruotia-/);
+  const openFence = display.search(/(?:^|\n)\s*~~~\s*skriptia-/);
   if (openFence !== -1 && !/\n\s*~~~\s*(?:\n|$)/.test(display.slice(openFence + 1))) {
     display = display.slice(0, openFence);
   }

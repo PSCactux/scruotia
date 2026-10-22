@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
     ? ` (campo especial: ${body.fieldKey === '__intro' ? 'la frase-tagline de la ficha' : body.fieldKey === '__pendiente' ? 'el "Pendiente: ..." al final' : 'la prosa libre tras los bullets'})`
     : '';
 
-  const systemPrompt = `Eres asistente narrativo de Scruotia. Recibirás una entidad de outline y un campo específico de su ficha. Tu único trabajo es proponer un valor concreto para ESE campo, coherente con el resto de la entidad y con el tono general de la historia.
+  const systemPrompt = `Eres asistente narrativo de Skriptia. Recibirás una entidad de outline y un campo específico de su ficha. Tu único trabajo es proponer un valor concreto para ESE campo, coherente con el resto de la entidad y con el tono general de la historia.
 
 Reglas absolutas:
 - Emite EXACTAMENTE un bloque PATCH y nada más. Sin texto antes ni después.

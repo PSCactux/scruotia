@@ -313,11 +313,11 @@ line
   });
 });
 
-describe('extractEntityUpdates — fenced protocol (~~~scruotia-*)', () => {
+describe('extractEntityUpdates — fenced protocol (~~~skriptia-*)', () => {
   it('parses a fenced CARD with attrs and body', () => {
     const t = `Genial.
 
-~~~scruotia-card personaje:mara
+~~~skriptia-card personaje:mara
 name=Mara
 icon=🧭
 ---
@@ -336,7 +336,7 @@ Listo.`;
   });
 
   it('parses a fenced PATCH with multiple fields', () => {
-    const t = `~~~scruotia-patch personaje:bruno
+    const t = `~~~skriptia-patch personaje:bruno
 Want=Finir el mapa de la isla
 Need=Atreverse a volver
 Arco=positivo — de exiliada a guía
@@ -351,7 +351,7 @@ Arco=positivo — de exiliada a guía
   });
 
   it('parses fenced PATCH with heredoc value', () => {
-    const t = `~~~scruotia-patch personaje:bruno
+    const t = `~~~skriptia-patch personaje:bruno
 __trailing=<<<
 Relojero que arregla todo menos su propio reloj.
 Cada noche da cuerda a uno distinto.
@@ -366,7 +366,7 @@ arco=positivo
   });
 
   it('parses fenced LINK with label', () => {
-    const t = `~~~scruotia-link personaje/mara lugar/faro
+    const t = `~~~skriptia-link personaje/mara lugar/faro
 label=vive en
 ~~~`;
     const r = extractEntityUpdates(t);
@@ -375,14 +375,14 @@ label=vive en
   });
 
   it('parses fenced DELETE with ref on args', () => {
-    const t = `~~~scruotia-delete personaje/x
+    const t = `~~~skriptia-delete personaje/x
 ~~~`;
     const r = extractEntityUpdates(t);
     expect(r.deletes).toEqual([{ type: 'personaje', slug: 'x' }]);
   });
 
   it('parses fenced FACT', () => {
-    const t = `~~~scruotia-fact
+    const t = `~~~skriptia-fact
 Mara tiene 64 años cuando empieza la novela.
 ~~~`;
     const r = extractEntityUpdates(t);
@@ -390,7 +390,7 @@ Mara tiene 64 años cuando empieza la novela.
   });
 
   it('parses fenced SUGGEST with options', () => {
-    const t = `~~~scruotia-suggest
+    const t = `~~~skriptia-suggest
 ¿Qué tipo de antagonista?
 - humano cercano
 - fuerza natural
@@ -404,7 +404,7 @@ Mara tiene 64 años cuando empieza la novela.
   });
 
   it('legacy <<<…>>> and fenced ~~~ coexist in the same turn', () => {
-    const t = `~~~scruotia-card personaje:a
+    const t = `~~~skriptia-card personaje:a
 name=A
 ---
 body A
@@ -422,7 +422,7 @@ body B
   it('strips fenced blocks from cleanedText', () => {
     const t = `Texto antes.
 
-~~~scruotia-patch personaje:x
+~~~skriptia-patch personaje:x
 Want=Y
 ~~~
 

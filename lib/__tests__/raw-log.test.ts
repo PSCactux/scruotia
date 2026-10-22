@@ -5,7 +5,7 @@ import os from 'node:os';
 import { logRawTurn, listRawTurns } from '../raw-log';
 
 async function tmpProject(): Promise<string> {
-  return fs.mkdtemp(path.join(os.tmpdir(), 'scruotia-raw-'));
+  return fs.mkdtemp(path.join(os.tmpdir(), 'skriptia-raw-'));
 }
 
 describe('logRawTurn', () => {
@@ -55,7 +55,7 @@ describe('logRawTurn', () => {
 
   it('does not throw on writeFile errors (best-effort)', async () => {
     // Pass an unwritable parent (file masquerading as dir) — should swallow.
-    const fake = await fs.mkdtemp(path.join(os.tmpdir(), 'scruotia-fakeroot-'));
+    const fake = await fs.mkdtemp(path.join(os.tmpdir(), 'skriptia-fakeroot-'));
     await fs.writeFile(path.join(fake, '99-ai'), 'I am a file, not a dir');
     const result = await logRawTurn(fake, 'user', 'x');
     expect(result).toBe(null);

@@ -6,7 +6,7 @@ import { writeEntity, readEntity, type Entity } from '../entities';
 import { snapshotEntity, listSnapshots, readSnapshot, restoreSnapshot, pruneSnapshots } from '../history';
 
 async function tmpProject(): Promise<string> {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'scruotia-history-'));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'skriptia-history-'));
   return root;
 }
 

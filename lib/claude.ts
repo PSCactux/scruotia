@@ -1,7 +1,7 @@
 import { query } from '@anthropic-ai/claude-agent-sdk';
 
 /**
- * Minimal chat message shape used by the Scruotia wrapper. Maps directly to
+ * Minimal chat message shape used by the Skriptia wrapper. Maps directly to
  * the role/content pair that the Claude Agent SDK accepts when serialized
  * into a single prompt string.
  */

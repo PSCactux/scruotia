@@ -6,7 +6,7 @@ import { createProject, listProjects, loadProject } from '../projects';
 
 let root: string;
 
-beforeEach(() => { root = mkdtempSync(path.join(tmpdir(), 'scruotia-proj-')); });
+beforeEach(() => { root = mkdtempSync(path.join(tmpdir(), 'skriptia-proj-')); });
 afterEach(() => { rmSync(root, { recursive: true, force: true }); });
 
 describe('projects', () => {

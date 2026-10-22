@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Scruotia",
+  title: "Skriptia",
   description: "Story bible & outline builder para novelas",
 };
 

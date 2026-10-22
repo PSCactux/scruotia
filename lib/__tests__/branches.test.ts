@@ -5,7 +5,7 @@ import os from 'node:os';
 import { newBranchId, saveBranch, readBranch, deleteBranch, listBranches, parseVariants, type SketchBranch } from '../branches';
 
 async function tmpProject(): Promise<string> {
-  return fs.mkdtemp(path.join(os.tmpdir(), 'scruotia-branches-'));
+  return fs.mkdtemp(path.join(os.tmpdir(), 'skriptia-branches-'));
 }
 
 function makeBranch(overrides: Partial<SketchBranch> = {}): SketchBranch {

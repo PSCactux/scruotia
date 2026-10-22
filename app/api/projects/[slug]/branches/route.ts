@@ -59,7 +59,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ slug: stri
     ? getField(parseBody(entity.body), fieldKey)
     : entity.body;
 
-  const systemPrompt = `Eres asistente narrativo de Scruotia. Tu trabajo es proponer ${n} variantes distintas y bien diferenciadas del ${fieldKey ? `campo "${fieldKey}" de una entidad` : 'cuerpo completo de una entidad'}, para que el usuario elija.
+  const systemPrompt = `Eres asistente narrativo de Skriptia. Tu trabajo es proponer ${n} variantes distintas y bien diferenciadas del ${fieldKey ? `campo "${fieldKey}" de una entidad` : 'cuerpo completo de una entidad'}, para que el usuario elija.
 
 REGLAS ABSOLUTAS:
 - Emite EXACTAMENTE ${n} bloques <<<VARIANT:id:label>>>...<<<END>>>.

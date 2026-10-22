@@ -17,7 +17,7 @@ export default async function Sidebar({
           <div className="w-9 h-9 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
             S
           </div>
-          <span className="font-bold text-slate-900 text-lg">Scruotia</span>
+          <span className="font-bold text-slate-900 text-lg">Skriptia</span>
         </div>
       </div>
 

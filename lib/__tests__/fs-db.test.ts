@@ -7,7 +7,7 @@ import { readEntity, writeEntity, listEntities, type Entity } from '../fs-db';
 let testDir: string;
 
 beforeEach(() => {
-  testDir = mkdtempSync(path.join(tmpdir(), 'scruotia-'));
+  testDir = mkdtempSync(path.join(tmpdir(), 'skriptia-'));
 });
 
 afterEach(() => {

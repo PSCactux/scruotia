@@ -1,4 +1,4 @@
-# Scruotia
+# Skriptia
 
 Outline a novel by talking to an AI. You tell the story; the AI keeps a structured story bible up to date, written in plain language instead of database fields.
 
@@ -38,7 +38,7 @@ Optional settings (see `.env.example`):
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `SCRUOTIA_PROJECTS_DIR` | `./projects` | Where project folders are stored |
+| `SKRIPTIA_PROJECTS_DIR` | `./projects` | Where project folders are stored |
 | `DEBUG_CLAUDE_SDK` | unset | Log unhandled Agent SDK events |
 
 Other scripts:
@@ -56,7 +56,7 @@ pnpm smoke:claude     # one real round-trip through the Agent SDK
 **1. The model answers in prose and emits silent fenced blocks.** The chat route (`app/api/chat/route.ts`) builds a system prompt with the current bible, the outline phase, the canonical facts and the per-type templates. The model replies normally, and when something in the story changes it adds blocks like these:
 
 ```text
-~~~scruotia-card personaje:mara
+~~~skriptia-card personaje:mara
 name=Mara
 icon=🧭
 ---
@@ -65,17 +65,17 @@ La farera que no quería visitas.
 - **Want:** que la dejen en paz
 ~~~
 
-~~~scruotia-patch personaje:mara
+~~~skriptia-patch personaje:mara
 backstory=<<<
 Treinta años sola en el cabo.
 >>>
 ~~~
 
-~~~scruotia-link personaje/mara lugar/faro
+~~~skriptia-link personaje/mara lugar/faro
 label=vive en
 ~~~
 
-~~~scruotia-fact
+~~~skriptia-fact
 Mara tiene 64 años cuando empieza la novela.
 ~~~
 ```

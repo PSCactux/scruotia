@@ -289,7 +289,7 @@ function ChapterCard({
       onDrop={(e) => {
         e.preventDefault();
         setDragOver(false);
-        const escenaSlug = e.dataTransfer.getData('text/scruotia-escena');
+        const escenaSlug = e.dataTransfer.getData('text/skriptia-escena');
         if (escenaSlug) onMoveScene(escenaSlug, cap.slug);
       }}
       className={`bg-pink-50 border-2 rounded-xl p-3 transition ${dragOver ? 'border-pink-500 ring-4 ring-pink-200' : 'border-pink-200 hover:border-pink-300'}`}
@@ -324,7 +324,7 @@ function SceneRow({ escena, busy, onOpenEntity }: { escena: Entity; busy: boolea
   return (
     <div
       draggable={!busy}
-      onDragStart={(e) => { e.dataTransfer.setData('text/scruotia-escena', escena.slug); e.dataTransfer.effectAllowed = 'move'; }}
+      onDragStart={(e) => { e.dataTransfer.setData('text/skriptia-escena', escena.slug); e.dataTransfer.effectAllowed = 'move'; }}
       onClick={() => onOpenEntity(escena)}
       className={`bg-white border border-slate-200 rounded-md px-2 py-1.5 text-[11px] text-slate-700 hover:border-indigo-300 transition flex items-center gap-1.5 ${busy ? 'opacity-50 cursor-wait' : 'cursor-grab active:cursor-grabbing'}`}
       title={`${escena.name}${beat ? ` · ${beat}` : ''}`}
